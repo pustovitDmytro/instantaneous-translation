@@ -4,16 +4,22 @@
  	"version": "0.0.1",
  	"author": "Dmytro Pustovit",
  	"manifest_version": 2,
-  	"icons": { "16": "1.png" },
+  	"icons": { 
+  		"16": "1.png",
+  		"32": "3.png",
+  		"64": "4.png"
+  	},
   	"background": {
     	"scripts": ["index.js"],
     	"persistent": false
     },
-  	"page_action": {
+  	"browser_action": {
 		"default_icon": {                    
             "16": "2.png"
         },
-      	"default_title": "Tooltip",
-        "default_popup": "popup.html"
-    }
+      	"default_title": "Tooltip"
+    },
+    "permissions": [
+    "alarms","notifications"
+   ]
 }
