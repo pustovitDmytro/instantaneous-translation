@@ -5,24 +5,24 @@
  	"author": "Dmytro Pustovit",
  	"manifest_version": 2,
   	"icons": { 
-  		"16": "1.png",
-  		"32": "3.png",
-  		"64": "4.png"
+  		"16": "icons/16-a.png",
+  		"32": "icons/32-a.png",
+  		"64": "icons/64-a.png"
   	},
   	"background": {
-    	"scripts": ["background.js", "secret.js"]
+    	"scripts": ["background.js", "secret.js","languages.js"]
     },
   	"browser_action": {
 		"default_icon": {                    
-            "16": "2.png"
+            "64": "icons/test_ico.png"
         },
       	"default_title": "Tooltip"
     },
     "content_scripts": [
   		{
   			"matches": ["<all_urls>"],
-    		"js": ["content.js","libs/jquery-3.1.1.min.js"]
+    		"js": ["content.js"]
   		}
 	],
-    "permissions": ["notifications","webRequest"]
+    "permissions": ["notifications"]
 }

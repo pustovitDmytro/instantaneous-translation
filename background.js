@@ -1,29 +1,45 @@
 var working = false;
+var LangTo = "uk";
+var dir = "balls/";
 
-var createMessage = function(text){
-	var LangTo = "uk";
+var notify = function(text,data){
+	var LangFrom = data.detected.lang;
+	var trText = data.text[0];
+	var from = {title: LangFrom, message: text };
+	var to = {title: LangTo, message: trText};
+	way = (avaliable(LangFrom))?("flags/"+dir+LangFrom+".png"):"flags/"+"unknown.png";
+	console.log(way);
+	var opt = { 
+		type: "list",
+		iconUrl: way,
+		title: "instantaneoustranslator:",
+		message: "translation",
+		items: [from,to]
+	}
+	chrome.notifications.create(opt);
+}
+
+var avaliable = function(lang){
+	pattern = "^"+lang+"$";
+	for(var i = 0; i< languages.length; i++)
+		if(languages[i].abbr.search(pattern)==0){
+			return true;
+		}
+	return false;
+}
+
+var translate = function(text){
 	var Url = "https://translate.yandex.net/api/v1.5/tr.json/translate?key="
     + apiKey + "&lang=" + LangTo + "&text=" + text + "&options=1";
     fetch(Url).then(r => r.json())
-    			.then(data => console.log(data))
-    			.catch(e => console.log("Error during request to yandex"));
+    			.then(data => notify(text, data))
+    			.catch(e => console.log("Error during request to yandex",e));
 }
 
 chrome.runtime.onMessage.addListener(function(mes){
-	var text = mes.text;
-	var obj = {title: "Item1", message: "668686"};
-	obj.message = text;
-	console.log(createMessage(text));
-	var opt = { 
-		type: "list",
-		iconUrl: "3.png",
-		title: "translator",
-		message: "text",
-		items: [ 
-			{title: "Item1", message: "This is item 1."}
-		]
-	}
-	chrome.notifications.create(opt);
+	var text = JSON.parse(mes).text;
+	console.log("selected text: ",text);
+	translate(text);	
 });
 
 chrome.browserAction.onClicked.addListener(function(){
