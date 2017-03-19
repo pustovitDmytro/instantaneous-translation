@@ -37,11 +37,20 @@ var translate = function(text){
 }
 
 chrome.runtime.onMessage.addListener(function(mes){
-	var text = JSON.parse(mes).text;
-	console.log("selected text: ",text);
-	translate(text);	
+	if(working){
+		var text = JSON.parse(mes).text;
+		console.log("selected text: ",text);
+		translate(text);
+	}	
 });
 
 chrome.browserAction.onClicked.addListener(function(){
 	working =! working;
+	if(working){
+		chrome.browserAction.setIcon({path: "icons/64-a.png"});
+		console.log("app is working");
+	}else{
+		chrome.browserAction.setIcon({path: "icons/64-n.png"});
+		console.log("app isn't working");
+	}
 });

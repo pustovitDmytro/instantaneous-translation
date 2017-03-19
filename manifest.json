@@ -4,19 +4,14 @@
  	"version": "0.0.1",
  	"author": "Dmytro Pustovit",
  	"manifest_version": 2,
-  	"icons": { 
-  		"16": "icons/16-a.png",
-  		"32": "icons/32-a.png",
-  		"64": "icons/64-a.png"
+  	"icons": {
+  		"128": "icons/main_ico.png"
   	},
   	"background": {
     	"scripts": ["background.js", "secret.js","languages.js"]
     },
   	"browser_action": {
-		"default_icon": {                    
-            "64": "icons/test_ico.png"
-        },
-      	"default_title": "Tooltip"
+      	"default_title": "Click here to activate/deactivate app"
     },
     "content_scripts": [
   		{
